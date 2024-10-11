@@ -5,7 +5,7 @@ Repozytorium do ćwiczeń laboratoryjnych z przedmiotu **Wstęp do informatyki**
 ## Funkcjonalności
 
 ### Link
-Kliknij [tutaj](https://example.com), aby przejść do strony AGH.
+Kliknij [tutaj](https://www.agh.edu.pl/), aby przejść do strony AGH.
 
 ### Lista numerowana
 
