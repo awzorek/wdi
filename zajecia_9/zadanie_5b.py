@@ -6,32 +6,44 @@ class ComplexNumber:
         self.im = im
 
     def add(self, other):
-        return ComplexNumber(self.re + other.re, self.im + other.im)
+        return ComplexNumber(round(self.re + other.re, 2), round(self.im + other.im, 2))
 
     def subtract(self, other):
-        return ComplexNumber(self.re - other.re, self.im - other.im)
+        return ComplexNumber(round(self.re - other.re, 2), round(self.im - other.im, 2))
 
     def multiply(self, other):
-        return ComplexNumber(self.re * other.re - self.im * other.im, self.re * other.im + self.im * other.re)
+        re = self.re * other.re - self.im * other.im
+        im = self.re * other.im + self.im * other.re
+        return ComplexNumber(round(re, 2), round(im, 2))
 
     def divide(self, other):
         denominator = other.re**2 + other.im**2
-        return ComplexNumber((self.re * other.re + self.im * other.im) / denominator, (self.im * other.re - self.re * other.im) / denominator)
+        re = (self.re * other.re + self.im * other.im) / denominator
+        im = (self.im * other.re - self.re * other.im) / denominator
+        return ComplexNumber(round(re, 2), round(im, 2))
 
     def power(self, n):
         r = math.sqrt(self.re**2 + self.im**2)
         phi = math.atan2(self.im, self.re)
         r_n = r ** n
         phi_n = phi * n
-        return ComplexNumber(r_n * math.cos(phi_n), r_n * math.sin(phi_n))
+        re = r_n * math.cos(phi_n)
+        im = r_n * math.sin(phi_n)
+        return ComplexNumber(round(re, 2), round(im, 2))
 
     def __str__(self):
-        Re = int(self.re) if self.re.is_integer() else self.re
-        Im = int(self.im) if self.im.is_integer() else self.im
+        Re = round(self.re, 2)
+        Im = round(self.im, 2)
+        Re_str = f"{Re:.2f}".rstrip('0').rstrip('.')
+        Im_str = f"{Im:.2f}".rstrip('0').rstrip('.')
         if Im == 0:
-            return f"{Re}"
+            return f"{Re_str}"
+        elif Re == 0:
+            return f"{Im_str}i"
+        elif Im > 0:
+            return f"{Re_str} + {Im_str}i"
         else:
-            return f"{Re} + {Im}i"
+            return f"{Re_str} - {Im_str.lstrip('-')}i"
 
 def read_complex(coefficient):
     while True:
